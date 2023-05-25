@@ -7,10 +7,15 @@
   "scripts": {
     "start": "server.js"
   },
-  "keywords": ["REST","api", "express"],
+  "keywords": [
+    "REST",
+    "api",
+    "express"
+  ],
   "author": "Fantastic Zebras",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "lowdb": "^6.0.1"
   }
 }
