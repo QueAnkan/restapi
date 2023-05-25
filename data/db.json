@@ -1,4 +1,10 @@
 {
 	"products":[],
-	"users":[]
+	"users":[
+		{
+			"id": 1, 
+			"name": "Ann-Sophie",
+			"password": "badboll"
+		}
+	]
 }
