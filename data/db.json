@@ -1,4 +1,22 @@
 {
+	
+	"users":[
+		{
+			"id": 1, 
+			"name": "Ann-Sophie",
+			"password": "red1"
+		},
+		{
+			"id": 2, 
+			"name": "Annika",
+			"password": "red2"
+		},
+		{
+			"id": 3, 
+			"name": "Terese",
+			"password": "red3"
+		}
+	],
 	"products": [
 		{
 			"id": 1,
@@ -219,6 +237,5 @@
 				"vit"
 			]
 		}
-	],
-	"users": []
+	]
 }
