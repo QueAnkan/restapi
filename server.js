@@ -8,7 +8,7 @@ const app = express()
 
 //Middleware
 //-lägger vi till sen för att använda req.body 
-//app.use('/api', express.json())
+app.use('/api', express.json())
 
 //Routes 
 app.use('/api/products', productsRouter)
