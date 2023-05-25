@@ -14,11 +14,14 @@
       "id": 3,
       "name": "Terese",
       "password": "red3"
+<<<<<<< HEAD
     },
     {
       "name": "Lisa",
       "password": "red4",
       "id": 4
+=======
+>>>>>>> acde604c368a6fbfab8679496114c126c207b731
     }
   ],
   "products": [
@@ -241,6 +244,19 @@
         "strå",
         "vit"
       ]
+<<<<<<< HEAD
+=======
+    },
+    {
+      "name": "Svart träningskeps",
+      "price": 79,
+      "image": "https://img.freepik.com/free-photo/isolated-black-cap_125540-1023.jpg?size=626&ext=jpg&ga=GA1.1.1027157510.1664794963&semt=sph",
+      "tags": [
+        "svart",
+        "keps",
+        "träning"
+      ]
+>>>>>>> acde604c368a6fbfab8679496114c126c207b731
     }
   ]
 }
