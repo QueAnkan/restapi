@@ -6,14 +6,18 @@ function isValidHat (h) {
 
 let nameIsValid = (typeof h.name) === 'string'
 nameIsValid = nameIsValid && h.name !== ''
+
 let priceIsvalid = (typeof h.price) === 'number'
 priceIsvalid = priceIsvalid && h.price  >0
+
 let imageIsValid = (typeof h.image) === 'string'
 imageIsValid = imageIsValid && h.image !== ''
+
 let tagsIsValid = (typeof h.tags) ==='array'
 tagsIsValid = tagsIsValid && h.tags !== []
 
-if(!nameIsValid) {
+if(!nameIsValid || !priceIsvalid || !imageIsValid
+	|| !tagsIsValid) {
 	return false
 }
 return true
