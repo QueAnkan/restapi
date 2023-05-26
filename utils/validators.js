@@ -50,6 +50,16 @@ function isValidId(user) {
 	return maybeId >= 0  
 } 
 
+function userExists(users, name, password) {
+	for (let i = 0; i < users.length; i++) {
+		if(users[i].name === name || users[i].password === password) {
+			return true;
+		}
+	}
+	return false
+
+}
+
 function hasId(object) {
 	let idIsValid = (typeof object.id) === 'number'
 	idIsValid = idIsValid && object.id >= 0
@@ -58,4 +68,4 @@ function hasId(object) {
 
 
 
-export {isValidHat, isValidUser, isValidId, hasId }
+export {isValidHat, isValidUser, isValidId, hasId , userExists}
