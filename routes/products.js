@@ -61,11 +61,18 @@ console.log('post possibleNewHat:', possibleNewHat);
 
 if(isValidHat(possibleNewHat)) {
 	await db.read()
+	if( await isHat(possibleNewHat)){
+		res.sendStatus(409)
+		console.log('Produkten finns redan');
+
+	}else{
+	
 	possibleNewHat.id = generateProductId()
 	db.data.products.push(possibleNewHat)
 	await db.write()
 	res.send(possibleNewHat)
 	console.log('post valid');
+	}
 }
 
 else {
@@ -82,3 +89,13 @@ function generateProductId() {
 	return highestId + 1
 }
 
+
+	async function isHat(h) {
+	console.log('db.data:', db.data);
+	let existingHat = db.data.products.some(product => product.name === h.name && product.image === h.image)
+	
+	if (existingHat) {
+		return true	
+	}
+	return false
+}

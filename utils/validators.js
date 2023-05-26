@@ -1,3 +1,4 @@
+import { log } from "console"
 
 function isValidHat (h) {
 	if ((typeof h) !== 'object' || h === null){
@@ -13,11 +14,10 @@ priceIsvalid = priceIsvalid && h.price  >0
 let imageIsValid = (typeof h.image) === 'string'
 imageIsValid = imageIsValid && h.image !== ''
 
-let tagsIsValid = (typeof h.tags) ==='array'
-tagsIsValid = tagsIsValid && h.tags !== []
+let tagsIsValid = Array.isArray(h.tags)
+tagsIsValid = tagsIsValid && h.tags.length !== 0
 
-if(!nameIsValid || !priceIsvalid || !imageIsValid
-	|| !tagsIsValid) {
+if(!nameIsValid  || !priceIsvalid || !imageIsValid ||!tagsIsValid ) {
 	return false
 }
 return true
@@ -50,6 +50,15 @@ function isValidId(user) {
 	return maybeId >= 0  
 } 
 
+function hasId(object) {
+	let idIsValid = (typeof object.id) === 'number'
+	idIsValid = idIsValid && object.id >= 0
+	return idIsValid
+}
 
 
-export {isValidHat, isValidUser, isValidId}
+
+
+
+
+export {isValidHat, isValidUser, isValidId, hasId }

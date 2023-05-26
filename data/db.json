@@ -241,17 +241,6 @@
         "strå",
         "vit"
       ]
-    },
-    {
-      "name": "Svart träningskeps",
-      "price": 79,
-      "image": "https://img.freepik.com/free-photo/isolated-black-cap_125540-1023.jpg?size=626&ext=jpg&ga=GA1.1.1027157510.1664794963&semt=sph",
-      "tags": [
-        "svart",
-        "keps",
-        "träning"
-      ],
-      "id": 21
     }
   ]
 }
