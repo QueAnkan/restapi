@@ -1,7 +1,7 @@
 import express from 'express'
 import { getDb } from '../data/database.js'
 // import {generateUserId} from '../utils/generateId.js'
-import { isValidId, isValidUser } from '../utils/validators.js'
+import { isValidId, isValidUser, userExists } from '../utils/validators.js'
 
 const router = express.Router()
 const db = getDb()
@@ -33,17 +33,23 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
 	let mayBeUsers = req.body
 	console.log('Incoming user: ' , mayBeUsers)
+	
+	await db.read()
+	const users = db.data.users
+	
+	if (isValidUser(mayBeUsers)) {
+		if (!userExists(users, mayBeUsers.name, mayBeUsers.password)) {
+			mayBeUsers.id = generateUserId();
+			console.log('Generated ID: ', mayBeUsers.id);
+			users.push(mayBeUsers);
 
-	if (isValidUser(mayBeUsers) ) {
-		await db.read()	
-		mayBeUsers.id = generateUserId()
-		console.log('Genereated ID: ', mayBeUsers.id )
-		db.data.users.push(mayBeUsers) 
-		await db.write()
-		res.status(200).json({ id: mayBeUsers.id})
-
+			await db.write();
+			res.status(201).json({ id: mayBeUsers.id });
+		} else {
+			res.status(409).json({ message: 'Username and password already exists' }); // Conflict
+		}
 	} else {
-		res.sendStatus(400) //Bad request
+		res.sendStatus(400); // Bad request
 	}
 
 })
