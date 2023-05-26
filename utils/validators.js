@@ -50,6 +50,12 @@ function isValidId(user) {
 	return maybeId >= 0  
 } 
 
+function hasId(object) {
+	let idIsValid = (typeof object.id) === 'number'
+	idIsValid = idIsValid && object.id >= 0
+	return idIsValid
+}
 
 
-export {isValidHat, isValidUser, isValidId}
+
+export {isValidHat, isValidUser, isValidId, hasId }

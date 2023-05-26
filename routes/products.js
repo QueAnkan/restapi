@@ -1,6 +1,6 @@
 import express from 'express'
 import { getDb } from '../data/database.js'
-import { isValidHat } from '../data/validator.js'
+import { isValidHat, isValidId, hasId } from '../utils/validators.js'
 
 const router = express.Router()
 const db = getDb()
@@ -73,7 +73,7 @@ else {
 }
 })
 
-export default router
+
 
 function generateProductId() {
 	const highestId = Number(db.data.products.reduce((maxId, currentProduct) => { return Math.max(maxId,  currentProduct.id)
@@ -81,3 +81,50 @@ function generateProductId() {
 	return highestId + 1
 }
 
+
+// Kunna ändra i produkterna
+router.put('/:id', async (req,res) => {
+	if(!isValidId(req.params.id)) {
+		res.sendStatus(400)
+		return
+	}
+	let id = Number(req.params.id)
+
+	if( !isValidHat(req.body) || !hasId ) {
+		res.sendStatus(400)
+		return
+	}
+
+	let editedHat = req.body
+	await db.read()
+	let oldHatIndex = db.data.products.findIndex(hat => hat.id === id)
+	if( oldHatIndex === -1 ) {
+		res.sendStatus(404)
+		return
+	}
+	db.data.products[oldHatIndex] = editedHat
+	await db.write()
+	res.sendStatus(200)
+})
+
+// Kunna ta bort en produkt
+router.delete('/:id', async (req, res) => {
+	if(!isValidId(req.params.id)) {
+		res.sendStatus(400)
+		return
+	}
+	let id = Number(req.params.id)
+	await db.read()
+	let maybeHat = db.data.products.find(hat => hat.id === id)
+	if (!maybeHat) {
+		res.sendStatus(404)
+		return
+	}
+	db.data.products = db.data.products.filter(hat => hat.id !== id)
+	await db.write()
+	res.sendStatus(200)
+} )
+
+
+
+export default router
