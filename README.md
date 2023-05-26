@@ -62,7 +62,7 @@ const urlProducts = "...api/products"
         "klassisk"
       ]
     }
-
+```
 	Or like this for users:
 ```
 	{
