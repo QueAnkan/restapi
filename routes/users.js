@@ -48,6 +48,27 @@ router.post('/', async (req, res) => {
 
 })
 
+router.delete('/:id', async(req, res) => {
+	console.log('Delete One/user; ')
+	if( !isValidId(req.params.id)) {
+		res.sendStatus(400) //Bad Request
+		return
+	}
+	let id = Number(req.params.id)
+
+	await db.read()
+
+	let mayBeUsers = db.data.users.find(user => user.id === id)
+	if(!mayBeUsers) {
+		res.sendStatus(404) //Not found
+		return
+	}
+	db.data.users = db.data.users.filter(user => user.id !== id)
+	await db.write()
+	res.sendStatus(200) //Det är ok!
+
+})
+
 
 function generateUserId() {
 	const highestId = Number(db.data.users.reduce((maxId, currentUser) => {
