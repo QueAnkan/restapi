@@ -16,11 +16,14 @@ It contains productsdata and userdata, and you can use the API to get the data, 
 #### Endpoints
 The url: 
 ....api/products
+
 ....api/users
+
 To find out a specific user you can use the endpoint: 
 ...api/products/id
 
-// Här kan vi lägga till sök endpoint också!! //
+GET /api/search
+
 
 The API is built to support the metods "GET", "POST, "PUT", "DELETE".
 
@@ -59,7 +62,18 @@ const urlProducts = "...api/products"
         "klassisk"
       ]
     }
+
+	Or like this for users:
 ```
+	{
+      "name": "Benny",
+      "password": "grävmask",
+      "id": 6
+    }
+```
+
+
+
 #### Status Codes
 
 	Here are the status-codes that are used:
@@ -73,4 +87,6 @@ const urlProducts = "...api/products"
 	| 409         | Conflict    |
 	| 500         | Internal Server problem|
 
-	Maintance and support: Fantastic :zebra:
+
+### Maintance and support: 
+	***Fantastic Zebras***
