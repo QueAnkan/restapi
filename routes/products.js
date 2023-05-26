@@ -1,6 +1,6 @@
 import express from 'express'
 import { getDb } from '../data/database.js'
-import { isValidHat } from '../data/validator.js'
+import { isValidHat } from '../utils/validators.js'
 
 const router = express.Router()
 const db = getDb()

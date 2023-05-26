@@ -1,6 +1,6 @@
 import express from 'express'
 import { getDb } from '../data/database.js'
-import { generateUserId } from '../utils/generateId.js'
+// import {generateUserId} from '../utils/generateId.js'
 import { isValidId, isValidUser } from '../utils/validators.js'
 
 const router = express.Router()
@@ -48,6 +48,15 @@ router.post('/', async (req, res) => {
 
 })
 
+
+function generateUserId() {
+	const highestId = Number(db.data.users.reduce((maxId, currentUser) => {
+		return Math.max(maxId, currentUser.id) 
+	}, 0))
+	console.log('Generate: ', highestId)
+	return highestId + 1 
+	
+}
 
 
 

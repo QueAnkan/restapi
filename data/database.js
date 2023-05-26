@@ -10,6 +10,7 @@ function getDb() {
 	const adapter = new JSONFile(file)
 	const db = new Low(adapter, {})
 	// {} är default data
+	
 	return db
 }
 

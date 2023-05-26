@@ -19,6 +19,16 @@
       "name": "Lisa",
       "password": "red4",
       "id": 4
+    },
+    {
+      "name": "Bengt",
+      "password": "red5",
+      "id": 5
+    },
+    {
+      "name": "Anna-Lena",
+      "password": "red7",
+      "id": 6
     }
   ],
   "products": [
