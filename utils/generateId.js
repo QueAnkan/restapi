@@ -1,4 +1,6 @@
+import { getDb } from "../data/database.js"
 
+const db = getDb
 
 function generateUserId() {
 	const highestId = db.data.users.reduce((maxId, currentUser) => {

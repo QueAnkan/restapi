@@ -1,6 +1,7 @@
 import express from 'express'
 import { getDb } from '../data/database.js'
-import { isValidHat } from '../data/validator.js'
+import { isValidHat} from '../utils/validators.js'
+//import { generateProductId } from '../utils/generateId.js'
 
 const router = express.Router()
 const db = getDb()
@@ -52,7 +53,7 @@ console.log('possible Hats ',possibleHats);
 
 })
 
-//lägga till nya produkter
+//lägga till nya produkter 
 router.post('/', async (req, res) =>{
 
 let possibleNewHat = req.body 
@@ -60,6 +61,7 @@ console.log('post possibleNewHat:', possibleNewHat);
 
 if(isValidHat(possibleNewHat)) {
 	await db.read()
+	possibleNewHat.id = generateProductId()
 	db.data.products.push(possibleNewHat)
 	await db.write()
 	res.send(possibleNewHat)
@@ -70,10 +72,13 @@ else {
 	res.sendStatus(400)
 	console.log('felsöker, post invalid');
 }
-
-
-
-
 })
 
 export default router
+
+function generateProductId() {
+	const highestId = Number(db.data.products.reduce((maxId, currentProduct) => { return Math.max(maxId,  currentProduct.id)
+	}, 0))
+	return highestId + 1
+}
+
