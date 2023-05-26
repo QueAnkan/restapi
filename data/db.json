@@ -12,16 +12,13 @@
     },
     {
       "id": 3,
-      "name": "Terese",
+      "name": "Therese",
       "password": "red3"
-<<<<<<< HEAD
     },
     {
       "name": "Lisa",
       "password": "red4",
       "id": 4
-=======
->>>>>>> acde604c368a6fbfab8679496114c126c207b731
     }
   ],
   "products": [
@@ -244,8 +241,6 @@
         "strå",
         "vit"
       ]
-<<<<<<< HEAD
-=======
     },
     {
       "name": "Svart träningskeps",
@@ -256,7 +251,6 @@
         "keps",
         "träning"
       ]
->>>>>>> acde604c368a6fbfab8679496114c126c207b731
     }
   ]
 }
