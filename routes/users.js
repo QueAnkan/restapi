@@ -1,6 +1,6 @@
 import express from 'express'
 import { getDb } from '../data/database.js'
-// import {generateUserId} from '../utils/generateId.js'
+import {generateUserId} from '../utils/generateId.js'
 import { isValidId, isValidUser, userExists } from '../utils/validators.js'
 
 const router = express.Router()
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
 	
 	if (isValidUser(mayBeUsers)) {
 		if (!userExists(users, mayBeUsers.name, mayBeUsers.password)) {
-			mayBeUsers.id = generateUserId();
+			mayBeUsers.id = await generateUserId();
 			console.log('Generated ID: ', mayBeUsers.id);
 			users.push(mayBeUsers);
 
@@ -76,14 +76,14 @@ router.delete('/:id', async(req, res) => {
 })
 
 
-function generateUserId() {
-	const highestId = Number(db.data.users.reduce((maxId, currentUser) => {
-		return Math.max(maxId, currentUser.id) 
-	}, 0))
-	console.log('Generate: ', highestId)
-	return highestId + 1 
+// function generateUserId() {
+// 	const highestId = Number(db.data.users.reduce((maxId, currentUser) => {
+// 		return Math.max(maxId, currentUser.id) 
+// 	}, 0))
+// 	console.log('Generate: ', highestId)
+// 	return highestId + 1 
 	
-}
+// }
 
 
 

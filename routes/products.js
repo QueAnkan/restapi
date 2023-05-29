@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 })
 
 //hämta en produkt utifrån ID
-/* router.get('/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
 	let possiblyId = Number(req.params.id)
 	
 		if(isNaN(possiblyId) || possiblyId < 0){
@@ -33,24 +33,24 @@ router.get('/', async (req, res) => {
 
 		res.send(possibleProduct)
 })
- */
+
 
 //hämta produkter utifrån tags ev till search?
-router.get('/:tags' , async (req, res) => {
-	let possibleTag = req.params.tags
-console.log('this is apossible tag:', possibleTag);
-	await db.read()
+// router.get('/:tags' , async (req, res) => {
+// 	let possibleTag = req.params.tags
+// console.log('this is apossible tag:', possibleTag);
+// 	await db.read()
 
 
-	let possibleHats = db.data.products.filter(products => products.tags.some( tag => tag === possibleTag))
+// 	let possibleHats = db.data.products.filter(products => products.tags.some( tag => tag === possibleTag))
 
-	if(!possibleHats){
-		sendStatus(404)
-	}
-console.log('possible Hats ',possibleHats);
-	res.send(possibleHats)
+// 	if(!possibleHats){
+// 		sendStatus(404)
+// 	}
+// console.log('possible Hats ',possibleHats);
+// 	res.send(possibleHats)
 
-})
+// })
 
 //lägga till nya produkter 
 router.post('/', async (req, res) =>{
@@ -81,13 +81,11 @@ else {
 })
 
 
-
 function generateProductId() {
 	const highestId = Number(db.data.products.reduce((maxId, currentProduct) => { return Math.max(maxId,  currentProduct.id)
 	}, 0))
 	return highestId + 1
 }
-
 
 	async function isHat(h) {
 	console.log('db.data:', db.data);

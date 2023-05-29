@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import productsRouter from './routes/products.js'
 import usersRouter from './routes/users.js'
 
@@ -6,9 +7,13 @@ import usersRouter from './routes/users.js'
 const port = 2023
 const app = express()
 
+
+
 //Middleware
 //-lägger vi till sen för att använda req.body 
+app.use( cors() )
 app.use('/api', express.json())
+
 
 //Routes 
 app.use('/api/products', productsRouter)
