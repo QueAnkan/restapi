@@ -5,7 +5,7 @@
 async function generateUserId() {
 	 console.log('Hämtar data: ? ', db)
 	await db.read()
-	let highestId = Number(db.data.users.reduce((maxId, currentUser) => {
+	const highestId = Number(db.data.users.reduce((maxId, currentUser) => {
 		return Math.max(maxId, currentUser.id) 
 	}, 0))
 
@@ -15,4 +15,12 @@ async function generateUserId() {
 	
 }
 
- export { generateUserId }
+async function generateProductId() {
+	console.log('Hämtar data: ? ', db)
+	await db.read()
+	const highestId = Number(db.data.products.reduce((maxId, currentProduct) => { return Math.max(maxId,  currentProduct.id)
+	}, 0))
+	return highestId + 1
+}
+
+ export { generateUserId, generateProductId }

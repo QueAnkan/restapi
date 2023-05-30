@@ -1,6 +1,7 @@
 import express from 'express'
 import { getDb } from '../data/database.js'
 import { isValidHat, isValidId, hasId } from '../utils/validators.js'
+import { generateProductId } from '../utils/generateId.js'
 
 const router = express.Router()
 const db = getDb()
@@ -66,7 +67,7 @@ if(isValidHat(possibleNewHat)) {
 
 	}else{
 	
-	possibleNewHat.id = generateProductId()
+	possibleNewHat.id = await generateProductId()
 	db.data.products.push(possibleNewHat)
 	await db.write()
 	res.send(possibleNewHat)
@@ -81,11 +82,11 @@ else {
 })
 
 
-function generateProductId() {
-	const highestId = Number(db.data.products.reduce((maxId, currentProduct) => { return Math.max(maxId,  currentProduct.id)
-	}, 0))
-	return highestId + 1
-}
+// function generateProductId() {
+// 	const highestId = Number(db.data.products.reduce((maxId, currentProduct) => { return Math.max(maxId,  currentProduct.id)
+// 	}, 0))
+// 	return highestId + 1
+// }
 
 	async function isHat(h) {
 	console.log('db.data:', db.data);
