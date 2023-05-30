@@ -34,24 +34,7 @@ router.get('/:id', async (req, res) => {
 
 		res.send(possibleProduct)
 })
-
-
-//hämta produkter utifrån tags ev till search?
-// router.get('/:tags' , async (req, res) => {
-// 	let possibleTag = req.params.tags
-// console.log('this is apossible tag:', possibleTag);
-// 	await db.read()
-
-
-// 	let possibleHats = db.data.products.filter(products => products.tags.some( tag => tag === possibleTag))
-
-// 	if(!possibleHats){
-// 		sendStatus(404)
-// 	}
-// console.log('possible Hats ',possibleHats);
-// 	res.send(possibleHats)
-
-// })
+ 
 
 //lägga till nya produkter 
 router.post('/', async (req, res) =>{
