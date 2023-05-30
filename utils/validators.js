@@ -25,11 +25,10 @@ return true
 }
 
 function isValidUser(u) {
-	if ((typeof u) !== 'object') {
-		return false
-	} else if ((u === null) ) {
+	if ((typeof u) !== 'object' || u === null) {
 		return false
 	}
+	
 	let nameIsValid = (typeof u.name) === 'string'
 	nameIsValid = nameIsValid && u.name !== ''
 
@@ -50,7 +49,7 @@ function isValidId(user) {
 	return maybeId >= 0  
 } 
 
-function userExists(users, name, password) {
+async function userExists(users, name, password) {
 	for (let i = 0; i < users.length; i++) {
 		if(users[i].name === name || users[i].password === password) {
 			return true;

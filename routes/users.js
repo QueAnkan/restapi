@@ -1,17 +1,20 @@
 import express from 'express'
 import { getDb } from '../data/database.js'
 import {generateUserId} from '../utils/generateId.js'
-import { isValidId, isValidUser, userExists } from '../utils/validators.js'
+import { hasId, isValidId, isValidUser, userExists } from '../utils/validators.js'
 
 const router = express.Router()
 const db = getDb()
 
+
+//hämta alla användare 
 router.get('/', async (req, res) => {
 	console.log('GET /users: ')
 	await db.read()
 	res.send(db.data.users)
 })
 
+//hämta en användare utifrån id
 router.get('/:id', async (req, res) => {
 	console.log('GET /users/:id')
 	if(!isValidId(req.params.id) ) {
@@ -30,30 +33,59 @@ router.get('/:id', async (req, res) => {
 
 })
 
+//lägg till en ny användare
 router.post('/', async (req, res) => {
+
 	let mayBeUsers = req.body
 	console.log('Incoming user: ' , mayBeUsers)
-	
-	await db.read()
-	const users = db.data.users
+	// const users = db.data.users
 	
 	if (isValidUser(mayBeUsers)) {
-		if (!userExists(users, mayBeUsers.name, mayBeUsers.password)) {
-			mayBeUsers.id = await generateUserId();
-			console.log('Generated ID: ', mayBeUsers.id);
-			users.push(mayBeUsers);
+		await db.read()
+		if ( await userExists(mayBeUsers)) {
+			res.sendStatus(409) 
+			console.log('Användaren finns redan')
+		}else{
 
+			mayBeUsers.id = await generateUserId();
+			db.data.users.push(mayBeUsers);
 			await db.write();
-			res.status(201).json({ id: mayBeUsers.id });
-		} else {
-			res.status(409).json({ message: 'Username and password already exists' }); // Conflict
+			res.send(mayBeUsers);
+			console.log('post valid')
+			//id: mayBeUsers.id 
 		}
-	} else {
+	}
+	else {
 		res.sendStatus(400); // Bad request
+		console.log('felsöker, post invalid')
 	}
 
 })
+//kunna ändra i användare
+router.put('/:id', async (req, res) => {
+	if(!isValidId(req.params.id)) {
+		res.sendStatus(400) 
+		return
+	}
+	let id = Number(req.params.id)
 
+	if(!isValidUser(req.body) || !hasId) {
+		res.sendStatus(400)
+		return
+	}
+	let editUser = req.body 
+	await db.read()
+	let oldUserIndex = db.data.users.findIndex(user => user.id === id)
+	if(oldUserIndex === -1) {
+		res.sendStatus(404)
+		return
+	}
+	db.data.users[oldUserIndex] = editUser
+	await db.write()
+	res.sendStatus(200)
+})
+
+//kunna ta bort en användare 
 router.delete('/:id', async(req, res) => {
 	console.log('Delete One/user; ')
 	if( !isValidId(req.params.id)) {
