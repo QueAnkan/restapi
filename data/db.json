@@ -12,28 +12,8 @@
     },
     {
       "id": 3,
-      "name": "Therese",
+      "name": "Terese",
       "password": "red3"
-    },
-    {
-      "name": "David",
-      "password": "red5",
-      "id": 4
-    },
-    {
-      "name": "Benny",
-      "password": "grävmask",
-      "id": 6
-    },
-    {
-      "name": "Arne",
-      "password": "groda35",
-      "id": 7
-    },
-    {
-      "name": "Grogu McYoda",
-      "password": "may-4th",
-      "id": 8
     }
   ],
   "products": [

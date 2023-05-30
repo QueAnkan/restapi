@@ -3,7 +3,7 @@
  const db = getDb()
 
 async function generateUserId() {
-	 console.log('Hämtar data: ? ', db)
+	 console.log('Hämtar data: ? ', db.data)
 	await db.read()
 	let highestId = Number(db.data.users.reduce((maxId, currentUser) => {
 		return Math.max(maxId, currentUser.id) 
